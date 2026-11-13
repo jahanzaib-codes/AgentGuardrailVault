@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  guardrail-vault:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agent-guardrail-vault
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+      - BASE_RPC_URL=${BASE_RPC_URL:-https://mainnet.base.org}
+      - ARBITRUM_RPC_URL=${ARBITRUM_RPC_URL:-https://arb1.arbitrum.io/rpc}
+    volumes:
+      - ./logs:/app/logs
+    command: ["demo"]
